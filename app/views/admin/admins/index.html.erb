@@ -1,0 +1,61 @@
+<% content_for :title, "Admins" %>
+
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">
+      Admins
+
+      <%= link_to "Add Admin".html_safe, new_admin_admin_path, { :class => 'btn btn-sm btn-primary pull-right' } if is_super_admin? %>
+    </h1>
+</div>
+
+<div class="wrapper-md">
+
+  <%= render 'admin/partials/flash_message' %>
+
+  <div class="panel panel-default">
+    <div class="table-responsive">
+      <table class="table table-striped b-t b-light">
+
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Role</th>
+            <% if is_super_admin? %>
+              <th class="text-center">Action</th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% unless @admins.empty? %>
+          <% @admins.each do |admin| %>
+            <tr>
+              <td><%= admin.name %></td>
+              <td><%= admin.email %></td>
+              <td><%= admin.phone %></td>
+              <td><%= admin.role %></td>
+              <% if is_super_admin? %>
+                <td class="table-actions text-center">
+                  <%= link_to "<i class='fa fa-times'></i>".html_safe, admin_admin_path(admin), :class => 'btn btn-sm btn-icon btn-danger', method: :delete, data: { confirm: 'Are you sure?' }  %>
+                  <%= link_to "<i class='fa fa-pencil'></i>".html_safe, '#', :rel => "#{admin.id}", :class => 'btn btn-sm btn-icon btn-dark admin_change_password' %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+          <% else %>
+            <tr>
+              <td class="text-center" colspan="5">
+                Please add an Admin
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+
+      </table>
+
+      <%= render 'admin/password/edit_password' %>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<nav ui-nav class="navi clearfix">
+  <ul class="nav">
+    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+      <span>Navigation</span>
+    </li>
+    <li>
+      <%= link_to "<i class='glyphicon glyphicon-th-large'></i> <span>Dashboard</span>".html_safe, admin_root_path %>
+    </li>
+
+    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+        <span>Settings</span>
+    </li>
+    <li>
+      <%= link_to "<i class='fa fa-user-secret'></i><span>Admins</span>".html_safe, admin_admins_path if is_super_admin? %>
+    </li>
+    <li>
+      <%= link_to "<i class='fa fa-user-secret'></i><span>Universities</span>".html_safe, admin_universities_path %>
+    </li>
+
+  </ul>
+</nav>

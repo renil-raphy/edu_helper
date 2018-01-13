@@ -1,0 +1,130 @@
+.table-action-button {
+  padding-left: 10px;
+}
+.table-actions {
+  width: 15%;
+}
+.input-group.pull-right {
+  text-align: right;
+}
+.text-error {
+  color: #a94442;
+  margin-top: 3px;
+  font-size: 12px;
+}
+.brand-logo {
+  width: 100%
+}
+.table-label {
+  width: 20%;
+}
+.creative_div {
+  display: inline-block;
+}
+.social_accounts_container {
+  margin-bottom: 10px;
+}
+.panel .item-content {
+  padding: 10px;
+}
+.nav.nav-tabs {
+  margin-bottom: 30px;
+}
+.avatar i.dark {
+    background-color: #3a3f51;
+}
+.help-block {
+  font-size: 13px;
+}
+.label.status {
+  text-transform: uppercase;
+}
+.bootstrap-tagsinput{
+  width: 100% !important;
+}
+.help-block {
+    color: #98a6ad !important;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.razorpay-payment-button {
+  -moz-user-select: none;
+  background-image: none;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  line-height: 1.42857;
+  padding: 6px 12px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  background-color: #23b7e5;
+  border-color: #23b7e5;
+  color: #ffffff !important;
+  border-radius: 2px;
+  border: 0px;
+  font-weight: 700;
+  margin: 15px;
+  outline: 0 none !important;
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+.m-t-alignment {
+  margin-top: 6px;
+}
+
+.tooltip_content{
+  max-width: 170px;
+  width: 170px;
+}
+
+.cursor_pointer { cursor: pointer; }
+
+.wrapper.sidebar {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.ul-padding {
+  padding-left: 25px !important;
+}
+
+.tab-content.no-styling {
+  padding: 0px !important;
+  border: 0px !important;
+  background-color: transparent !important;
+}
+
+.text-1x {
+  font-size: 24px;
+}
+
+.daterangepicker .calendar-date {
+  color: #333;
+}
+
+#media_container {
+  position: relative;
+}
+
+#remove_media_from_preview {
+  position: absolute;
+  right: 0px;
+  padding: 2px 3px;
+  margin: 5px;
+  background-color: #fff;
+  z-index: 1;
+  border-radius: 3px;
+}
+
+.header_timezone { margin: 13px 10px 10px; }
+
+.automation_status_text {
+  vertical-align: super;
+}
+
+@media (max-width: 767px) {
+  .header_timezone { margin: 13px 0px 10px; font-weight: 400; }
+}

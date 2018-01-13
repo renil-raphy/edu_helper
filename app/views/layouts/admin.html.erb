@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+  <head>
+    <meta charset="utf-8" />
+    <title>SkreemSocial Admin - <%= yield(:title) %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <%= stylesheet_link_tag "app/styles.css" %>
+    <%= yield :css_libraries %>
+    <%= yield :custom_styles %>
+
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+
+    <div class="app app-header-fixed app-aside-fixed">
+      <!-- header -->
+      <%= render "admin/partials/header" %>
+      <!-- / header -->
+
+      <!-- aside -->
+      <%= render "admin/partials/aside" %>
+      <!-- / aside -->
+
+      <!-- content -->
+      <div id="content" class="app-content" role="main">
+        <div class="app-content-body ">
+          <%= yield %>
+        </div>
+      </div>
+      <!-- /content -->
+
+      <!-- footer -->
+      <%= render "admin/partials/footer" %>
+      <!-- / footer -->
+    </div>
+
+    <%= javascript_include_tag  "app/scripts.js" %>
+    <%= javascript_include_tag  "app/admin.js" %>
+    <%= yield :js_libraries %>
+    <%= yield :javascript %>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
+
+  </body>
+</html>
