@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       }
       resources :admins, only: [:destroy]
       resources :universities, except: [:destroy]
+      resources :districts, except: [:destroy]
+      resources :locations, except: [:destroy]
 
       get '/' => 'dashboard#index', as: 'root'
     end
