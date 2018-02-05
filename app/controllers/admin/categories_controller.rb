@@ -39,6 +39,6 @@ class Admin::CategoriesController < Admin::AdminController
   end
 
   def category_params
-    params.require(:category).permit(:name, :order_no)
+    params.require(:category).permit(:name)
   end
 end
