@@ -8,6 +8,7 @@ class District < ApplicationRecord
 
   # Associations
   has_many :locations
+  has_many :users
   # --------------------
 
   # Validations

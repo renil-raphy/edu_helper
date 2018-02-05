@@ -16,6 +16,7 @@ gem 'carrierwave-imageoptimizer'
 gem 'carrierwave-processing'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
+gem 'email_validator'
 gem 'friendly_id', '~> 5.2', '>= 5.2.1'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
@@ -37,6 +38,7 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'mailcatcher'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

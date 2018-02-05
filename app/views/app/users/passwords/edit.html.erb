@@ -1,0 +1,39 @@
+<% content_for :title, "Change Password" %>
+
+<div class="container w-xxl w-auto-xs">
+  <a href class="navbar-brand block m-t"></a>
+  <%= link_to image_tag("app/logo-mark.png", size: "42x30", alt: "SkreemSocial") + '<span class="hidden-folded m-l-xs">SkreemSocial</span>'.html_safe, app_root_path, class: "navbar-brand block m-t" %>
+  <div class="m-b-lg">
+    <div class="wrapper text-center">
+      <strong>Change your password</strong>
+    </div>
+
+    <% if resource.errors.any? && resource.errors.messages[:password].present? %>
+      <% flash[:error] = resource.errors.messages[:password].first %>
+    <% elsif resource.errors.any? && resource.errors.messages[:password_confirmation].present? %>
+      <% flash[:error] = "Confirm password " + resource.errors.messages[:password_confirmation].first %>
+    <% end %>
+    <div class="text-danger wrapper text-center" ng-show="authError">
+      <div class='row'>
+        <%= render 'app/partials/flash_message' %>
+      </div>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= f.hidden_field :reset_password_token %>
+      <div class="list-group list-group-sm">
+        <div class="list-group-item">
+          <%= f.password_field :password, class: 'form-control no-border', placeholder: "New Password" %>
+        </div>
+        <div class="list-group-item">
+          <%= f.password_field :password_confirmation, class: 'form-control no-border', placeholder: "Confirm New Password" %>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-lg btn-primary btn-block">Change Password</button>
+    <% end %>
+  </div>
+  <div class="text-center">
+    <p><small class="text-muted">&copy; <%= Date.current.year %> SkreemSocial. All Rights Reserved.</small></p>
+  </div>
+</div>

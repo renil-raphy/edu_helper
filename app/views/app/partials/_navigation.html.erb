@@ -1,0 +1,12 @@
+<nav ui-nav class="navi clearfix">
+  <ul class="nav">
+
+    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+      <span>Navigation</span>
+    </li>
+    <li>
+      <%= link_to("<i class='glyphicon glyphicon-th-large'></i><span>Dashboard</span>".html_safe, app_root_path, {"data-toggle" => 'tooltip', "title" => 'Dashboard', "data-placement" => 'right', "data-container" => "body", class: "dashboard_sidebar_tooltip"}) %>
+    </li>
+
+  </ul>
+</nav>

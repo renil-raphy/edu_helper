@@ -1,0 +1,54 @@
+<header id="header" class="app-header navbar" role="menu">
+    <!-- navbar header -->
+    <div class="navbar-header bg-dark-header">
+      <button class="pull-right visible-xs dk" ui-toggle-class="show" target=".navbar-collapse">
+        <i class="glyphicon glyphicon-cog"></i>
+      </button>
+      <button class="pull-right visible-xs" ui-toggle-class="off-screen" target=".app-aside" ui-scroll="app">
+        <i class="glyphicon glyphicon-align-justify"></i>
+      </button>
+      <!-- brand -->
+      <%= link_to image_tag("app/logo-mark.png", height: "30", alt: "EduHelper") + '<span class="hidden-folded m-l-xs">EduHelper</span>'.html_safe, app_root_path, class: "navbar-brand text-lt" %>
+      <!-- / brand -->
+    </div>
+    <!-- / navbar header -->
+
+    <!-- navbar collapse -->
+    <div class="collapse pos-rlt navbar-collapse box-shadow bg-white-only">
+      <!-- buttons -->
+      <div class="nav navbar-nav hidden-xs">
+        <a href="#" class="btn no-shadow navbar-btn" ui-toggle-class="app-aside-folded" target=".app">
+          <i class="fa fa-dedent fa-fw text"></i>
+          <i class="fa fa-indent fa-fw text-active"></i>
+        </a>
+      </div>
+      <!-- / buttons -->
+
+      <!-- nabar right -->
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" data-toggle="dropdown" class="dropdown-toggle clear" data-toggle="dropdown">
+            <span class="thumb-xs avatar pull-right m-t-n-xs m-b-n-sm m-l-sm">
+              <%= image_tag "app/user.jpg" %>
+            </span>
+            <span class="hidden-sm hidden-md"><%= current_user.present? ? current_user.name : "EduHelper User" %></span>
+            <b class="caret"></b>
+          </a>
+          <!-- dropdown -->
+          <ul class="dropdown-menu animated fadeIn w">
+            <li>
+              <%= link_to("Profile".html_safe, app_settings_profile_path) %>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <%= link_to('Logout', destroy_app_user_session_path, :method => :delete, "ui-sref" => "access.signin")  %>
+            </li>
+          </ul>
+          <!-- / dropdown -->
+        </li>
+      </ul>
+      <!-- / navbar right -->
+
+    </div>
+    <!-- / navbar collapse -->
+</header>

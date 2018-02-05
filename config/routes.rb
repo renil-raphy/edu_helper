@@ -17,5 +17,24 @@ Rails.application.routes.draw do
     end
   end
 
+  constraints :subdomain => "app" do
+    scope :module => "app", :as => "app" do
+
+      # Devise and Users
+      devise_for :users, controllers: {
+        sessions: 'app/users/sessions',
+        registrations: 'app/users/registrations',
+        confirmations: 'app/users/confirmations',
+        passwords: 'app/users/passwords'
+      }, :path => '', :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "sign_up" }
+
+      get '/settings/profile' => 'users#edit'
+      post '/profile/update' => 'users#update'
+      match '/update_password' => 'password#update', via: :patch
+
+      get '/' => 'dashboard#index', as: 'root'
+    end
+  end
+
   root :to => 'app/dashboard#index'
 end

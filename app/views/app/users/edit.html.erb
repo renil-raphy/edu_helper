@@ -1,0 +1,107 @@
+<% content_for :title, "Profile" %>
+
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">Profile</h1>
+</div>
+
+<div class="wrapper-md">
+  <%= render 'app/partials/flash_message' %>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold">
+          Edit Profile
+        </div>
+        <div class="panel-body">
+          <%= form_for :user, url: app_profile_update_path, method: :post, :html => {:class => 'form-horizontal'} do |f| %>
+
+            <div class="form-group <%= 'has-error' if @user.errors[:name].present? %>">
+                <%= f.label :name, 'Name', :class => 'col-sm-2 control-label' %>
+                <div class="col-sm-5">
+                  <%= f.text_field :name, :class => 'form-control' %>
+                  <%= show_errors(@user, :name).html_safe %>
+                </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+
+            <div class="form-group">
+                <%= f.label :email, 'Email Address', :class => 'col-sm-2 control-label' %>
+                <div class="col-sm-5">
+                    <%= f.text_field :email, :class => 'form-control', disabled: "disabled" %>
+                </div>
+                <% if @user.confirmed_at.present? %>
+                  <i class="fa fa-check-circle cursor_pointer text-success" data-toggle="tooltip" data-placement="top" title="Verified on <%= @user.confirmed_at.strftime("%b %d, %Y") %>"></i>
+                <% else %>
+                  <i class="fa fa-ban cursor_pointer text-danger" data-toggle="tooltip" data-placement="top" title="Not Confirmed"></i>
+                <% end %>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-10 col-sm-offset-2">
+                <%= link_to 'Change Password', '', { :class => 'btn btn-info btn-xs', :data => { :toggle => 'modal', :target => '#changePassword'} } %>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+
+            <div class="form-group <%= 'has-error' if @user.errors[:gender].present? %>">
+              <%= f.label :gender, 'Gender', :class => 'col-sm-2 control-label' %>
+              <div class="col-sm-5">
+                <div class="btn-group" data-toggle="buttons">
+                  <% gender = (@user.gender).present? ? @user.gender.downcase : "" %>
+
+                  <% ["male", "female"].each do |element| %>
+                    <label class="btn btn-sm btn-default <%= 'active' if gender == element %>">
+                      <%= radio_button("user", "gender", element) %> <%= element.capitalize %>
+                    </label>
+                  <% end %>
+                </div>
+
+                <%= show_errors(@user, :gender).html_safe %>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+
+            <div class="form-group <%= 'has-error' if @user.errors[:date_of_birth].present? %>">
+              <%= f.label :date_of_birth, 'Date of Birth', :class => 'col-sm-2 control-label' %>
+
+              <% dob = (@user.date_of_birth).present? ? @user.date_of_birth.strftime("%d-%m-%Y") : "" %>
+              <div class="col-sm-5">
+                <input name='user[date_of_birth]' value='<%= dob %>' ui-jq="daterangepicker" ui-options="{
+                        singleDatePicker: true,
+                        format: 'DD-MM-YYYY',
+                        showDropdowns: true,
+                        startDate: '<%= dob %>',
+                        }" class="form-control w-md" />
+                <%= show_errors(@user, :date_of_birth).html_safe %>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+
+            <div class="form-group <%= 'has-error' if @user.errors[:district_id].present? %>">
+              <%= f.label :district_id, 'District', :class => 'col-sm-2 control-label' %>
+              <div class="col-sm-5">
+                <%= f.collection_select(:district_id, @districts, :id, :name, { :include_blank => 'Select Your District', :prompt => false }, { :class => 'form-control' }) %>
+                <%= show_errors(@user, :district_id).html_safe %>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+
+            <div class="form-group">
+              <div class="col-sm-5 col-sm-offset-2">
+                <%= f.submit 'Update Profile', :class => 'btn btn-primary' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render 'app/password/edit_password' %>
+
+<% content_for :javascript do %>
+  <script>
+    $('[data-toggle="tooltip"]').tooltip();
+  </script>
+<% end %>

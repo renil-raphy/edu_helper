@@ -2,7 +2,8 @@
 <html lang="en" class="">
   <head>
     <meta charset="utf-8" />
-    <title>EduHelper Admin - <%= yield(:title) %></title>
+    <title><%= yield(:title) %> - EduHelper</title>
+    <meta name="description" content="EduHelper" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
     <%= stylesheet_link_tag "app/styles.css" %>
@@ -13,13 +14,14 @@
   </head>
   <body>
 
-    <div class="app app-header-fixed app-aside-fixed">
+    <div class="app app-header-fixed app-aside-fixed <%= 'app-aside-folded' if @side_bar_state %>">
+
       <!-- header -->
-      <%= render "admin/partials/header" %>
+      <%= render "app/partials/header" %>
       <!-- / header -->
 
       <!-- aside -->
-      <%= render "admin/partials/aside" %>
+      <%= render "app/partials/aside" %>
       <!-- / aside -->
 
       <!-- content -->
@@ -31,20 +33,25 @@
       <!-- /content -->
 
       <!-- footer -->
-      <%= render "admin/partials/footer" %>
+      <%= render "app/partials/footer" %>
       <!-- / footer -->
+
     </div>
 
     <%= javascript_include_tag  "app/scripts.js" %>
-    <%= javascript_include_tag  "app/admin.js" %>
+
     <%= yield :js_libraries %>
     <%= yield :javascript %>
 
     <script type="text/javascript">
       $(document).ready(function() {
         $('[data-toggle="tooltip"]').tooltip();
+
+        $("#footer_button_to_top").on("click", function(e){
+          e.preventDefault();
+          $('html, body').animate({scrollTop : 0},500);
+        });
       });
     </script>
-
   </body>
 </html>
