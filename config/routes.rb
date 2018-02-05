@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :universities, except: [:destroy]
       resources :districts, except: [:destroy]
       resources :locations, except: [:destroy]
+      resources :categories, except: [:destroy, :show]
 
       get '/' => 'dashboard#index', as: 'root'
     end
