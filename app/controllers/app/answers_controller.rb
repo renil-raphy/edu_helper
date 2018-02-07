@@ -1,7 +1,7 @@
 class App::AnswersController < App::ApplicationController
-  before_action :set_new_question, only: [:new]
-  before_action :set_user_categories, only: [:new]
+  before_action :set_new_question, :set_user_categories, only: [:new]
   before_action :set_current_question, only: [:create]
+  before_action :set_completion_percentage
 
   def new
   end
@@ -28,7 +28,17 @@ class App::AnswersController < App::ApplicationController
 
   def set_user_categories
     if @question.blank?
+      @quiz_completed = true
 
+      if current_user.user_categories.blank?
+        current_user.answers.group(:category).sum(:weightage).each do |category, weightage|
+          current_user.user_categories.create(category: category, total_weightage: weightage)
+        end
+      end
+
+      @my_categories = current_user.user_categories.includes(:category).order(total_weightage: :desc)
+    else
+      @quiz_completed = false
     end
   end
 
@@ -38,6 +48,10 @@ class App::AnswersController < App::ApplicationController
 
   def answer_params
     params.require(:answer).permit(:weightage)
+  end
+
+  def set_completion_percentage
+    @completion_percentage = ((current_user.answers.count.to_f/Question.count)*100).to_i
   end
 
 end

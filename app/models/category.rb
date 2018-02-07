@@ -6,7 +6,8 @@ class Category < ApplicationRecord
 
   # Associations
   has_many :questions
-  has_many :answers 
+  has_many :answers
+  has_many :user_categories 
   # ------------
 
   # Validations
