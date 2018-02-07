@@ -5,7 +5,8 @@ class Category < ApplicationRecord
   default_scope { order("name asc") }
 
   # Associations
-  has_many :questions 
+  has_many :questions
+  has_many :answers 
   # ------------
 
   # Validations

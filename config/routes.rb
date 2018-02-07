@@ -34,6 +34,8 @@ Rails.application.routes.draw do
       post '/profile/update' => 'users#update'
       match '/update_password' => 'password#update', via: :patch
 
+      resources :answers, only: [:new, :create]
+
       get '/' => 'dashboard#index', as: 'root'
     end
   end

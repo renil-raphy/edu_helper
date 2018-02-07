@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
    # Associations
    belongs_to :district
+   has_many :answers 
    # ---------------
 
    # Validations

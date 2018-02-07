@@ -2,6 +2,7 @@ class Question < ApplicationRecord
 
   # Associations
   belongs_to :category
+  has_many :answers 
   # --------------------
 
   # Validations

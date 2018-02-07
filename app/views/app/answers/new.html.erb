@@ -1,0 +1,60 @@
+<% content_for :title, "Quiz" %>
+
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">Quiz</h1>
+</div>
+
+<div class="wrapper-md">
+
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <%= form_for :answer, url: app_answers_path, method: :post, :html => {:class => 'form-horizontal', id: "quiz_form"} do |f| %>
+
+            <%= hidden_field_tag(:question_id, "#{@question.id}") %>
+
+            <div class="form-group">
+              <div class="col-sm-12 text-md">
+                <%= @question.qn_text %>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+
+            <div class="form-group">
+              <div class="col-sm-12">
+                <div class="radio"><label><input type="radio" name="answer[weightage]" value="5" class="my_answer"> Strongly Agree</label></div>
+                <div class="radio"><label><input type="radio" name="answer[weightage]" value="4" class="my_answer"> Agree</label></div>
+                <div class="radio"><label><input type="radio" name="answer[weightage]" value="3" class="my_answer"> Undecided</label></div>
+                <div class="radio"><label><input type="radio" name="answer[weightage]" value="2" class="my_answer"> Disagree</label></div>
+                <div class="radio"><label><input type="radio" name="answer[weightage]" value="1" class="my_answer"> Strongly Disagree</label></div>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+
+            <div class="form-group">
+              <div class="col-sm-12 text-center">
+                <%= f.submit 'Submit', :class => 'btn btn-primary', id: "submit_my_answer" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<% content_for :javascript do %>
+  <script>
+    $("#submit_my_answer").on("click", function(e){
+      e.preventDefault();
+      if ($(".my_answer:checked").val()){
+        $("#quiz_form").submit();
+      }
+      else {
+        alert("Please choose your answer.")
+      }
+    });
+  </script>
+<% end %>

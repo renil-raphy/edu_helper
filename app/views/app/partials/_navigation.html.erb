@@ -7,6 +7,9 @@
     <li>
       <%= link_to("<i class='glyphicon glyphicon-th-large'></i><span>Dashboard</span>".html_safe, app_root_path, {"data-toggle" => 'tooltip', "title" => 'Dashboard', "data-placement" => 'right', "data-container" => "body", class: "dashboard_sidebar_tooltip"}) %>
     </li>
+    <li>
+      <%= link_to("<i class='glyphicon glyphicon-th-large'></i><span>Quiz</span>".html_safe, new_app_answer_path, {"data-toggle" => 'tooltip', "title" => 'Quiz', "data-placement" => 'right', "data-container" => "body", class: "dashboard_sidebar_tooltip"}) %>
+    </li>
 
   </ul>
 </nav>
