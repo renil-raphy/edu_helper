@@ -6,6 +6,10 @@ class University < ApplicationRecord
   default_scope { order(:name) }
   # --------------------
 
+  # Associations
+  has_many :colleges
+  # --------------------
+
   # Validations
   validates :name, presence: { message: "Please enter the name"},
                    length: { minimum: 2, message: "Please enter a valid university name with min. 2 characters"},

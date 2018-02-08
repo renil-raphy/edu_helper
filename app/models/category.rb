@@ -1,13 +1,15 @@
 class Category < ApplicationRecord
+
+  # Basic Configurations
   extend FriendlyId
   friendly_id :name, use: :slugged
-
   default_scope { order("name asc") }
+  # ------------
 
   # Associations
   has_many :questions
   has_many :answers
-  has_many :user_categories 
+  has_many :user_categories
   # ------------
 
   # Validations

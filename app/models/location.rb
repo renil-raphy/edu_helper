@@ -8,6 +8,7 @@ class Location < ApplicationRecord
 
   # Associations
   belongs_to :district
+  has_many :colleges
   # --------------------
 
   # Validations
