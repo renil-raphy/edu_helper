@@ -7,6 +7,8 @@ class Course < ApplicationRecord
   # ------------
 
   # Associations
+  has_many :college_courses
+  has_many :colleges, through: :college_courses
   # ------------
 
   # Validations

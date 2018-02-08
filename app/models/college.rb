@@ -9,6 +9,9 @@ class College < ApplicationRecord
   # Associations
   belongs_to :university
   belongs_to :location
+
+  has_many :college_courses
+  has_many :courses, through: :college_courses
   # ------------
 
   # Validations
