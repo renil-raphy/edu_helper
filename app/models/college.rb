@@ -8,7 +8,7 @@ class College < ApplicationRecord
 
   # Associations
   belongs_to :university
-  belongs_to :location
+  belongs_to :district
 
   has_many :college_courses
   has_many :courses, through: :college_courses
@@ -18,7 +18,7 @@ class College < ApplicationRecord
   validates :name, presence: { message: "Please enter the name"},
                    length: { minimum: 2, message: "Please enter a valid college name with min. 2 characters"}
   validates :university_id, presence: { message: "Please select the University"}
-  validates :location_id, presence: { message: "Please select the Location"}
+  validates :district_id, presence: { message: "Please select the District"}
   # --------------------
 
   private

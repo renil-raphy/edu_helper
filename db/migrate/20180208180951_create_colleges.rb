@@ -7,11 +7,11 @@ class CreateColleges < ActiveRecord::Migration[5.0]
       t.string :phone
       t.string :website
       t.integer :university_id, null: false
-      t.integer :location_id, null: false
+      t.integer :district_id, null: false
       t.timestamps null: false
     end
 
     add_index :colleges, :university_id
-    add_index :colleges, :location_id
+    add_index :colleges, :district_id
   end
 end
