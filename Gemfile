@@ -28,6 +28,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'valid_url'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
+gem 'yaml_db'
 
 group :development, :test do
   gem 'byebug', platform: :mri
