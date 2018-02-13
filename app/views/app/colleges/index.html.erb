@@ -1,0 +1,59 @@
+<% content_for :title, "Colleges" %>
+
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">Colleges<%= (" - "+@university.name) if @university.present? %></h1>
+</div>
+
+<div class="wrapper-md">
+
+    <%= render 'admin/partials/flash_message' %>
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="panel panel-default">
+          <div class="panel-body no-padder">
+
+            <div class="table-responsive">
+              <table class="table table-striped b-t b-light">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Contact Details</th>
+                    <th>District</th>
+                    <th class="text-center">Courses Count</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% unless @colleges.empty? %>
+                  <% @colleges.each do |college| %>
+                    <tr>
+                      <td><%= college.name %></td>
+                      <td>
+                        <%= truncate(college.address.to_s, length: 40) %>
+                        <%= ("<br/>Ph: "+college.phone.to_s).html_safe if college.phone.present? %>
+                      </td>
+                      <td><%= college.district.name %></td>
+                      <td class="text-center"><%= college.courses.count %></td>
+                      <td class="table-actions text-center">
+                      </td>
+                    </tr>
+                  <% end %>
+                  <% else %>
+                    <tr>
+                      <td class="text-center" colspan="9">
+                        No Colleges
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>

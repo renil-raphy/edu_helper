@@ -1,5 +1,76 @@
-<div class="hbox hbox-auto-xs hbox-auto-sm">
-  <div class="col">
-    <% content_for :title, "Dashboard" %>
-  </div>
+<% content_for :title, "Dashboard" %>
+
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">Dashboard</h1>
+</div>
+
+<div class="wrapper-md">
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+
+        <%= render 'admin/partials/flash_message' %>
+
+        <form action="#" class="m-b-md ng-pristine ng-valid">
+          <div class="input-group">
+            <input type="text" class="form-control input-lg" placeholder="Type keyword">
+            <span class="input-group-btn">
+              <button class="btn btn-lg btn-default" type="button">Search</button>
+            </span>
+          </div>
+        </form>
+
+        <div class="panel panel-default">
+          <div class="panel-heading wrapper b-b b-light">
+            <h4 class="font-thin m-t-none m-b-none text-muted">Choose University</h4>
+          </div>
+
+          <div class="panel-body no-padder">
+
+            <div class="table-responsive">
+              <table class="table table-striped b-t b-light">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Contact Details</th>
+                    <th>Address</th>
+                    <th class="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% unless @universities.empty? %>
+                  <% @universities.each do |university| %>
+                    <tr>
+                      <td><%= university.name %></td>
+                      <td>
+                        <% if university.phone.present? %>
+                          <%= university.phone %>
+                          <br>
+                        <% end %>
+                        <% if university.website.present? %>
+                          <%= link_to((university.website+' <i class="fa fa-external-link m-l-xs text-xs" aria-hidden="true"></i>').html_safe, university.website, class: "text-info", target: "_blank") %>
+                        <% end %>
+                      </td>
+                      <td><%= simple_format(university.address) %></td>
+                      <td class="table-actions text-center">
+                        <%= link_to "<i class='fa fa-eye'></i>".html_safe, app_university_colleges_path(university), { :class => 'btn btn-sm btn-icon btn-dark' } %>
+                      </td>
+                    </tr>
+                  <% end %>
+                  <% else %>
+                    <tr>
+                      <td class="text-center" colspan="9">
+                        Please add a University
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
 </div>

@@ -35,6 +35,11 @@ Rails.application.routes.draw do
       match '/update_password' => 'password#update', via: :patch
 
       resources :answers, only: [:new, :create]
+      resources :colleges, only: [:index, :show]
+
+      resources :universities, only: [:show] do
+        resources :colleges, only: [:index, :show]
+      end
 
       get '/' => 'dashboard#index', as: 'root'
     end
