@@ -4,6 +4,10 @@
     <h1 class="m-n font-thin h3">Colleges<%= (" - "+@university.name) if @university.present? %></h1>
 </div>
 
+<% append_dict = {} %>
+<% append_dict[:query] = params[:query] if params[:query].present? %>
+<% append_dict[:district] = params[:district] if params[:district].present? %>
+
 <div class="wrapper-md">
 
   <div class="panel panel-default">
@@ -12,19 +16,32 @@
     </div>
     <div class="panel-body">
       <div class="row">
+        <div class="col-sm-9">
+          <% search_path_dynamic = @university.present? ? app_university_colleges_path(@university) : app_colleges_path %>
+          <%= form_tag search_path_dynamic, method: :get do %>
+            <div class="input-group">
+              <%= text_field_tag :query, "#{params[:query]}", class: "input-sm form-control", placeholder: "Type Keyword. Eg: BA, BCom, Music, English, BBA, etc..." %>
+              <span class="input-group-btn">
+                <%= submit_tag 'Search!', class: "btn btn-sm btn-default" %>
+              </span>
+            </div>
+          <% end %>
+        </div>
         <div class="col-sm-3">
-          <div class="btn-group dropdown">
-            <button data-toggle="dropdown" class="btn btn-default btn-sm" aria-expanded="false">Filter By District <span class="caret"></span></button>
+          <div class="btn-group dropdown pull-right">
+            <button data-toggle="dropdown" class="btn btn-default btn-sm" aria-expanded="false">
+              <%= @district.present? ? (@district.name + " - Colleges") : "Filter By District" %>
+              <span class="caret"></span>
+            </button>
             <ul class="dropdown-menu">
+              <% append_dict_district = append_dict.clone.except(:district) %>
               <% @district_filter_hash.keys.each do |district_filter| %>
-                <li><a href="?district=<%= district_filter %>"><%= @district_filter_hash[district_filter] %></a></li>
+                <% append_dict_district[:district] = district_filter %>
+                <% filter_path_dynamic = @university.present? ? app_university_colleges_path(@university, append_dict_district) : app_colleges_path(append_dict_district) %>
+                <li><a href="<%= filter_path_dynamic %>"><%= @district_filter_hash[district_filter] %></a></li>
               <% end %>
             </ul>
           </div>
-        </div>
-        <div class="col-sm-3">
-        </div>
-        <div class="col-sm-3">
         </div>
       </div>
     </div>
@@ -52,40 +69,40 @@
                 </thead>
                 <tbody>
                   <% unless @colleges.empty? %>
-                  <% @colleges.each do |college| %>
-                    <tr>
-                      <td>
-                        <%= college.name %>
-                        <div class="text-xs text-muted">
-                          <span title="<%= college.address.to_s %>" data-toggle='tooltip' data-placement='right'>
-                            <%= truncate(college.address.to_s, length: 40) %>
-                          </span>
-                          <%= ("<br/>Ph: "+college.phone.to_s).html_safe if college.phone.present? %>
-                        </div>
-                      </td>
-                      <td>
-                        <ul class="no-padder">
-                          <% college.college_courses.each do |college_course| %>
-                            <li>
-                              <%= college_course.course.name %>
-                              <% if college_course.with_subjects.present? %>
-                                <span class="text-xs text-muted">with <%= college_course.with_subjects %></span>
-                              <% end %>
-                              <% if college_course.no_of_seats != 0 %>
-                                <span class="text-xs text-info">(<%= college_course.no_of_seats %> seats)</span>
-                              <% end %>
-                            </li>
-                          <% end %>
-                        </ul>
-                      </td>
-                      <td class="text-center"><%= college.district.name %></td>
-                      <% if @university.blank? %>
-                        <td class="text-center">
-                          <%= college.university.name %>
+                    <% @colleges.each do |college| %>
+                      <tr>
+                        <td>
+                          <%= college.name %>
+                          <div class="text-xs text-muted">
+                            <span title="<%= college.address.to_s %>" data-toggle='tooltip' data-placement='right'>
+                              <%= truncate(college.address.to_s, length: 40) %>
+                            </span>
+                            <%= ("<br/>Ph: "+college.phone.to_s).html_safe if college.phone.present? %>
+                          </div>
                         </td>
-                      <% end %>
-                    </tr>
-                  <% end %>
+                        <td>
+                          <ul class="no-padder">
+                            <% college.college_courses.each do |college_course| %>
+                              <li>
+                                <span class="<%= 'heighted_text' if @course_ids.include?(college_course.course.id) %>"><%= college_course.course.name %></span>
+                                <% if college_course.with_subjects.present? %>
+                                  <span class="text-xs text-muted">with <%= college_course.with_subjects %></span>
+                                <% end %>
+                                <% if college_course.no_of_seats != 0 %>
+                                  <span class="text-xs text-info">(<%= college_course.no_of_seats %> seats)</span>
+                                <% end %>
+                              </li>
+                            <% end %>
+                          </ul>
+                        </td>
+                        <td class="text-center"><%= college.district.name %></td>
+                        <% if @university.blank? %>
+                          <td class="text-center">
+                            <%= college.university.name %>
+                          </td>
+                        <% end %>
+                      </tr>
+                    <% end %>
                   <% else %>
                     <tr>
                       <td class="text-center" colspan="9">
@@ -97,9 +114,30 @@
               </table>
             </div>
 
+            <% unless @colleges.empty? %>
+              <footer class="panel-footer">
+                <div class="row">
+                  <div class="col-sm-4 text-left">
+                    <small class="text-muted inline m-t-sm m-b-sm">
+                      <%= page_entries_info @colleges %>
+                    </small>
+                  </div>
+                  <div class="col-sm-8 text-right text-center-xs">
+                    <%= will_paginate @colleges, renderer: BootstrapPagination::Rails, class: 'pagination-sm m-t-none m-b-none', previous_label: '<i class="fa fa-chevron-left"></i>', next_label: '<i class="fa fa-chevron-right"></i>', inner_window: 1, outer_window: 1 %>
+                  </div>
+                </div>
+              </footer>
+            <% end %>
+
           </div>
         </div>
       </div>
     </div>
 
 </div>
+
+<% content_for :custom_styles do %>
+    <style>
+      .heighted_text { background-color: #ff0; }
+    </style>
+<% end %>

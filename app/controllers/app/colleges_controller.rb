@@ -1,13 +1,14 @@
 class App::CollegesController < App::ApplicationController
-  before_action :set_university, :set_filters, :set_district, only: [:index]
+  before_action :set_university, :set_filters, :set_district, :set_course, only: [:index]
   before_action :set_college, only: [:show]
 
   def index
+    filtered_college_ids = @district_college_ids & @course_college_ids
 
     if @university.present?
-      colleges = @university.colleges.includes(:district, college_courses: :course).where(id: @district_college_ids)
+      colleges = @university.colleges.includes(:district, college_courses: :course).where(id: filtered_college_ids)
     else
-      colleges = College.includes(:district, :university, college_courses: :course).where(id: @district_college_ids)
+      colleges = College.includes(:district, :university, college_courses: :course).where(id: filtered_college_ids)
     end
 
     @colleges = colleges.paginate(:page => page_number, :per_page => 25)
@@ -31,6 +32,16 @@ class App::CollegesController < App::ApplicationController
   def set_district
     @district = District.where(slug: params["district"]).first
     @district_college_ids = @district.present? ? @district.college_ids : College.ids
+  end
+
+  def set_course
+    if params[:query].present?
+      @course_ids = Course.where("lower(name) like ? ", "%#{params[:query].strip.downcase}%").ids
+      @course_college_ids = CollegeCourse.where(course_id: @course_ids).pluck(:college_id).uniq
+    else
+      @course_ids = []
+      @course_college_ids = College.ids
+    end
   end
 
 end

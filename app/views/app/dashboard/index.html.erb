@@ -11,14 +11,14 @@
 
         <%= render 'admin/partials/flash_message' %>
 
-        <form action="#" class="m-b-md ng-pristine ng-valid">
+        <%= form_tag app_colleges_path, method: :get, class: "m-b-md" do %>
           <div class="input-group">
-            <input type="text" class="form-control input-lg" placeholder="Type keyword">
+            <%= text_field_tag :query, "#{params[:query]}", class: "form-control input-lg", placeholder: "Type Keyword. Eg: BA, BCom, Music, English, BBA, etc..." %>
             <span class="input-group-btn">
-              <button class="btn btn-lg btn-default" type="button">Search</button>
+              <%= submit_tag 'Search!', class: "btn btn-lg btn-default" %>
             </span>
           </div>
-        </form>
+        <% end %>
 
         <div class="panel panel-default">
           <div class="panel-heading wrapper b-b b-light">
