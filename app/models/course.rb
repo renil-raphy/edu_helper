@@ -10,8 +10,8 @@ class Course < ApplicationRecord
   has_many :college_courses
   has_many :colleges, through: :college_courses
 
-  has_many :category_courses
-  has_many :categories, through: :category_courses
+  has_many :course_categories
+  has_many :categories, through: :course_categories
   # ------------
 
   # Validations

@@ -11,8 +11,8 @@ class Category < ApplicationRecord
   has_many :answers
   has_many :user_categories
 
-  has_many :category_courses
-  has_many :courses, through: :category_courses
+  has_many :course_categories
+  has_many :courses, through: :course_categories
   # ------------
 
   # Validations

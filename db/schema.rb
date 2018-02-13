@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180207181952) do
+ActiveRecord::Schema.define(version: 20180208184242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,49 @@ ActiveRecord::Schema.define(version: 20180207181952) do
     t.datetime "updated_at",               null: false
     t.text     "description"
     t.text     "carriers",    default: [],              array: true
+  end
+
+  create_table "college_courses", force: :cascade do |t|
+    t.integer  "college_id",    null: false
+    t.integer  "course_id",     null: false
+    t.string   "with_subjects"
+    t.integer  "no_of_seats"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["college_id"], name: "index_college_courses_on_college_id", using: :btree
+    t.index ["course_id"], name: "index_college_courses_on_course_id", using: :btree
+  end
+
+  create_table "colleges", force: :cascade do |t|
+    t.string   "name",          null: false
+    t.string   "slug",          null: false
+    t.text     "address"
+    t.string   "phone"
+    t.string   "website"
+    t.integer  "university_id", null: false
+    t.integer  "district_id",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["district_id"], name: "index_colleges_on_district_id", using: :btree
+    t.index ["university_id"], name: "index_colleges_on_university_id", using: :btree
+  end
+
+  create_table "course_categories", force: :cascade do |t|
+    t.integer  "category_id", null: false
+    t.integer  "course_id",   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_course_categories_on_category_id", using: :btree
+    t.index ["course_id"], name: "index_course_categories_on_course_id", using: :btree
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.string   "slug",        null: false
+    t.text     "description"
+    t.string   "duration"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "districts", force: :cascade do |t|
