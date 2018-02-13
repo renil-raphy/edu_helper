@@ -6,6 +6,30 @@
 
 <div class="wrapper-md">
 
+  <div class="panel panel-default">
+    <div class="panel-heading font-bold">
+      Filter Colleges
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="btn-group dropdown">
+            <button data-toggle="dropdown" class="btn btn-default btn-sm" aria-expanded="false">Filter By District <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <% @district_filter_hash.keys.each do |district_filter| %>
+                <li><a href="?district=<%= district_filter %>"><%= @district_filter_hash[district_filter] %></a></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-3">
+        </div>
+      </div>
+    </div>
+  </div>
+
     <%= render 'admin/partials/flash_message' %>
 
     <div class="row">
@@ -19,25 +43,47 @@
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th>Contact Details</th>
-                    <th>District</th>
-                    <th class="text-center">Courses Count</th>
-                    <th class="text-center">Action</th>
+                    <th>Courses</th>
+                    <th class="text-center">District</th>
+                    <% if @university.blank? %>
+                      <th class="text-center">University</th>
+                    <% end %>
                   </tr>
                 </thead>
                 <tbody>
                   <% unless @colleges.empty? %>
                   <% @colleges.each do |college| %>
                     <tr>
-                      <td><%= college.name %></td>
                       <td>
-                        <%= truncate(college.address.to_s, length: 40) %>
-                        <%= ("<br/>Ph: "+college.phone.to_s).html_safe if college.phone.present? %>
+                        <%= college.name %>
+                        <div class="text-xs text-muted">
+                          <span title="<%= college.address.to_s %>" data-toggle='tooltip' data-placement='right'>
+                            <%= truncate(college.address.to_s, length: 40) %>
+                          </span>
+                          <%= ("<br/>Ph: "+college.phone.to_s).html_safe if college.phone.present? %>
+                        </div>
                       </td>
-                      <td><%= college.district.name %></td>
-                      <td class="text-center"><%= college.courses.count %></td>
-                      <td class="table-actions text-center">
+                      <td>
+                        <ul class="no-padder">
+                          <% college.college_courses.each do |college_course| %>
+                            <li>
+                              <%= college_course.course.name %>
+                              <% if college_course.with_subjects.present? %>
+                                <span class="text-xs text-muted">with <%= college_course.with_subjects %></span>
+                              <% end %>
+                              <% if college_course.no_of_seats != 0 %>
+                                <span class="text-xs text-info">(<%= college_course.no_of_seats %> seats)</span>
+                              <% end %>
+                            </li>
+                          <% end %>
+                        </ul>
                       </td>
+                      <td class="text-center"><%= college.district.name %></td>
+                      <% if @university.blank? %>
+                        <td class="text-center">
+                          <%= college.university.name %>
+                        </td>
+                      <% end %>
                     </tr>
                   <% end %>
                   <% else %>
