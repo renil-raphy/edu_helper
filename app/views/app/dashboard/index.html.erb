@@ -9,6 +9,12 @@
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
 
+        <% if current_user.user_categories.blank? %>
+          <div class="alert alert-info">
+            <strong><%= link_to("Click Here", new_app_answer_path)%></strong> to view your Quiz. We can show better search results based on your interests after that.
+          </div>
+        <% end %>
+
         <%= render 'admin/partials/flash_message' %>
 
         <%= form_tag app_colleges_path, method: :get, class: "m-b-md" do %>

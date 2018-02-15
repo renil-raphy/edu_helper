@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
       resources :answers, only: [:new, :create]
       resources :colleges, only: [:index, :show]
+      resources :suggestions, only: [:index]
 
       resources :universities, only: [:show] do
         resources :colleges, only: [:index, :show]

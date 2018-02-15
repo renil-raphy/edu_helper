@@ -1,0 +1,137 @@
+<% content_for :title, "Advanced Suggestions" %>
+
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">Advanced Suggestions</h1>
+</div>
+
+<% append_dict = {} %>
+<% append_dict[:query] = params[:query] if params[:query].present? %>
+<% append_dict[:district] = params[:district] if params[:district].present? %>
+
+<div class="wrapper-md">
+
+  <% if current_user.user_categories.present? %>
+
+    <%= render 'admin/partials/flash_message' %>
+
+    <div class="row">
+        <div class="col-md-12">
+
+          <div class="panel panel-default">
+
+            <div class="row wrapper">
+              <div class="col-sm-4 m-b-xs">
+              </div>
+              <div class="col-sm-8 m-b-xs">
+                <div class="btn-group dropdown pull-right">
+                  <button data-toggle="dropdown" class="btn btn-default btn-sm" aria-expanded="false">
+                    <%= @district.present? ? (@district.name + " - Colleges") : "Filter By District" %>
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <% append_dict_district = append_dict.clone.except(:district) %>
+                    <% @district_filter_hash.keys.each do |district_filter| %>
+                      <% append_dict_district[:district] = district_filter %>
+                      <% filter_path_dynamic = @university.present? ? app_university_colleges_path(@university, append_dict_district) : app_colleges_path(append_dict_district) %>
+                      <li><a href="<%= filter_path_dynamic %>"><%= @district_filter_hash[district_filter] %></a></li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-body no-padder">
+
+              <div class="table-responsive">
+                <table class="table table-striped b-t b-light">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Courses</th>
+                      <th class="text-center">District</th>
+                      <% if @university.blank? %>
+                        <th class="text-center">University</th>
+                      <% end %>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% unless @colleges.empty? %>
+                      <% @colleges.each do |college| %>
+                        <tr>
+                          <td>
+                            <%= college.name %>
+                            <div class="text-xs text-muted">
+                              <span title="<%= college.address.to_s %>" data-toggle='tooltip' data-placement='right'>
+                                <%= truncate(college.address.to_s, length: 40) %>
+                              </span>
+                              <%= ("<br/>Ph: "+college.phone.to_s).html_safe if college.phone.present? %>
+                            </div>
+                          </td>
+                          <td>
+                            <ul class="no-padder">
+                              <% college.college_courses.each do |college_course| %>
+                                <li>
+                                  <span class="<%= 'heighted_text' if @course_ids.include?(college_course.course.id) %>"><%= college_course.course.name %></span>
+                                  <% if college_course.with_subjects.present? %>
+                                    <span class="text-xs text-muted">with <%= college_course.with_subjects %></span>
+                                  <% end %>
+                                  <% if college_course.no_of_seats != 0 %>
+                                    <span class="text-xs text-info">(<%= college_course.no_of_seats %> seats)</span>
+                                  <% end %>
+                                </li>
+                              <% end %>
+                            </ul>
+                          </td>
+                          <td class="text-center"><%= college.district.name %></td>
+                          <% if @university.blank? %>
+                            <td class="text-center">
+                              <%= college.university.name %>
+                            </td>
+                          <% end %>
+                        </tr>
+                      <% end %>
+                    <% else %>
+                      <tr>
+                        <td class="text-center" colspan="9">
+                          No Colleges
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+
+              <% unless @colleges.empty? %>
+                <footer class="panel-footer">
+                  <div class="row">
+                    <div class="col-sm-4 text-left">
+                      <small class="text-muted inline m-t-sm m-b-sm">
+                        <%= page_entries_info @colleges %>
+                      </small>
+                    </div>
+                    <div class="col-sm-8 text-right text-center-xs">
+                      <%= will_paginate @colleges, renderer: BootstrapPagination::Rails, class: 'pagination-sm m-t-none m-b-none', previous_label: '<i class="fa fa-chevron-left"></i>', next_label: '<i class="fa fa-chevron-right"></i>', inner_window: 1, outer_window: 1 %>
+                    </div>
+                  </div>
+                </footer>
+              <% end %>
+
+            </div>
+          </div>
+        </div>
+      </div>
+  <% else %>
+    <div class="alert alert-info">
+      Advanced suggestions will be available only after the Quiz.
+      <br>
+      <strong><%= link_to("Click Here", new_app_answer_path)%></strong> to view your Quiz. We can show better search results based on your interests after that.
+    </div>
+  <% end %>
+
+</div>
+
+<% content_for :custom_styles do %>
+    <style>
+      .heighted_text { background-color: #ff0; }
+    </style>
+<% end %>
