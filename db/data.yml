@@ -68,7 +68,7 @@ categories:
     - Linguistic Intelligence
     - linguistic-intelligence
     - '2018-02-05 06:06:39.019168'
-    - '2018-02-07 18:30:37.48361'
+    - '2018-02-15 17:35:13.05472'
     - Being the intelligence most commonly shared by humans, linguistic intelligence
       involves the human capacity to think in words and use these to make oneself
       understood. It is this type of intelligence that allows a person to appoint
@@ -79,12 +79,12 @@ categories:
       a person’s enjoyment of crossword puzzles, storytelling, reading, and writing.
       So the next time you think of these as “geeky” activities, you’ll do a better
       job of describing them as activities “word smart” people take pleasure in.
-    - "{}"
+    - "{Poet,Journalist,Writer,Teacher,Lawyer,Politician,Translator}"
   - - 2
     - Logical-mathematical Intelligence
     - logical-mathematical-intelligence
     - '2018-02-05 06:06:55.959163'
-    - '2018-02-07 18:31:11.480843'
+    - '2018-02-15 17:36:29.911573'
     - Who can forget that classmate of yours in high school who seemed to know the
       answer to every mathematical equation your teacher asked? Who can also fail
       to remember that peer of yours who could reason his way to winning every argument?
@@ -98,12 +98,12 @@ categories:
       arithmetic problems. Later on, you might see these youth going on to become
       detectives, scientists, and mathematicians. Logical-mathematical intelligence
       has been closely linked to fluid intelligence and general intelligence.
-    - "{}"
+    - "{Scientists,Engineers,Accountants,Mathematicians}"
   - - 3
     - Musical Intelligence
     - musical-intelligence
     - '2018-02-05 06:07:12.389509'
-    - '2018-02-07 18:32:17.449451'
+    - '2018-02-15 17:37:24.092952'
     - While other people gravitate towards nature, there are also those who tend to
       be drawn to the musical arts. These “musical smart” people are usually more
       sensitive to sounds that most individuals aren’t aware of. The intelligence
@@ -115,12 +115,12 @@ categories:
       that demonstrates a melodic inclination. It is also interesting to note that
       a connection has been shown to exist between emotions and music as well as mathematics
       and music.
-    - "{}"
+    - '{Musician,"Disc jockey",Singer,Composer}'
   - - 4
     - Spatial Intelligence
     - spatial-intelligence
     - '2018-02-05 06:07:21.355832'
-    - '2018-02-07 18:32:50.383137'
+    - '2018-02-15 17:38:27.392027'
     - 'The last domain is spatial intelligence, which is defined as the human capacity
       to consider things in three dimensions. This type of intelligence involves the
       following core capacities: a dynamic imagination, image manipulation, mental
@@ -134,12 +134,12 @@ categories:
       many who score high in more than one category. The most famous one that would
       come to mind is Leonardo De Vinci. Go over the list and analyze which type of
       intelligence you would categorize yourself.'
-    - "{}"
+    - "{Sculptor,Artist,Inventor,Architect,Mechanic,Engineer}"
   - - 5
     - Bodily-Kinesthetic Intelligence
     - bodily-kinesthetic-intelligence
     - '2018-02-05 06:07:32.628982'
-    - '2018-02-07 18:27:44.058245'
+    - '2018-02-15 17:39:40.671683'
     - Know how you tend to embarrass yourself with your two left feet and see your
       best friend practically floating on the dance floor? Well, there’s an explanationfor
       that “injustice.” While clumsy people have the tendency to be awkward in all
@@ -150,12 +150,12 @@ categories:
       of persons struggle to become well-coordinated, people who possess this type
       of intelligence usually grow up to become craftspeople, dancers, surgeons, athletes,
       and other careers involving exceptional mind-body union.
-    - "{}"
+    - '{Athlete,"PE Teacher",Dancer,Actor,Firefighter}'
   - - 6
     - Interpersonal Intelligence
     - interpersonal-intelligence
     - '2018-02-05 06:07:45.010623'
-    - '2018-02-07 18:29:30.333461'
+    - '2018-02-15 17:40:56.339895'
     - You might have observed that there are certain persons who have the seemingly
       unique ability to get along superbly with others. These “people smart” individuals,
       with the use of their interpersonal intelligence, interact with others in such
@@ -166,12 +166,12 @@ categories:
       type of intelligence manifested by politicians, social workers, actors, and
       teachers. This type of intelligence can also be found in young adults who hold
       leadership roles.
-    - "{}"
+    - '{Counselor,"Sales person",Politician,"Business person",Minister}'
   - - 7
     - Intraprersonal Intelligence
     - intraprersonal-intelligence
     - '2018-02-05 06:07:55.47359'
-    - '2018-02-07 18:30:05.655077'
+    - '2018-02-15 17:41:50.234599'
     - People who have the remarkable ability to understand themselves, their thoughts,
       and their emotions and are capable of using this knowledge to plan their lives
       possess intra-personal intelligence. While intra-personal intelligence does
@@ -180,12 +180,12 @@ categories:
       their own emotions, are self-motivated, and tend to be shy. Examples of people
       with evident intra-personal intelligence include philosophers, spiritual leaders,
       writers, and psychologists.
-    - "{}"
+    - "{Researchers,Theorists,Philosophers}"
   - - 8
     - Spiritual OR Existential Intelligence
     - spiritual-or-existential-intelligence
     - '2018-02-05 06:08:05.939091'
-    - '2018-02-07 18:33:34.082918'
+    - '2018-02-15 17:42:42.532637'
     - Even as other people go about their daily lives without devoting much thought
       to their existence, people with existential intelligence tend to mull over “deep”
       thoughts. These thoughts may include the why’s and how’s of life and death.
@@ -196,12 +196,12 @@ categories:
       life and death. Though not much discussion has been done about existential intelligence,
       it has also been called spiritual or moral intelligence. Those with high existential
       intelligence are deeply philosophical.
-    - "{}"
+    - "{Scientist,Philosopher,Theologian}"
   - - 9
     - Environmental OR Naturalist Intelligence
     - environmental-or-naturalist-intelligence
     - '2018-02-05 06:08:26.360043'
-    - '2018-02-07 18:28:56.945319'
+    - '2018-02-15 17:43:32.656192'
     - Ever wonder why certain people are able to connect with animals just like that?
       Have you ever encountered someone that possess what is commonly referred to
       as a “green thumb”? Well, those people are great examples of “nature smart”
@@ -214,7 +214,7 @@ categories:
       intelligence remains a vital component of roles like being a chef or botanist.
       This type of intelligence is also seen in the way consumers discriminate among
       products.
-    - "{}"
+    - '{Scientist,Naturalist,"Landscape architect"}'
 
 ---
 college_courses:
