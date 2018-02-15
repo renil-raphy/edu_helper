@@ -35,8 +35,11 @@ class App::CollegesController < App::ApplicationController
   end
 
   def set_course
-    if params[:query].present?
-      @course_ids = Course.where("lower(name) like ? ", "%#{params[:query].strip.downcase}%").ids
+    query_string = params[:query].to_s.strip
+    query_string.gsub!(".","")
+
+    if query_string.present?
+      @course_ids = Course.where("lower(name) like ? ", "%#{query_string.downcase}%").ids
       @course_college_ids = CollegeCourse.where(course_id: @course_ids).pluck(:college_id).uniq
     else
       @course_ids = []
