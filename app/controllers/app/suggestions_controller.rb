@@ -39,11 +39,7 @@ class App::SuggestionsController < App::ApplicationController
   def set_courses
     if current_user.user_categories.present?
       my_top_score = current_user.user_categories.maximum("total_weightage")
-      puts 1111111111111111111111
-      puts my_top_score
       my_category_ids = current_user.user_categories.where(total_weightage: my_top_score).pluck(:category_id)
-      puts 2222222222222222222
-      puts my_category_ids
       @course_ids = CourseCategory.where(category_id: my_category_ids).pluck(:course_id)
       @course_college_ids = CollegeCourse.where(course_id: @course_ids).pluck(:college_id).uniq
     end
